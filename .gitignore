@@ -1,0 +1,13 @@
+.obsidian/
+.trash/
+.smart-env/
+.space/
+.makemd/
+*.tmp
+*.log
+*.env
+*.key
+*.sqlite
+*.db
+node_modules/
+__pycache__/
