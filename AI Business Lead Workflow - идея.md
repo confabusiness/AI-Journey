@@ -1,97 +1,81 @@
-# AI Business Lead Workflow - идея
+# AI Business Lead Workflow
 
-## Статус
+## Concept
 
-Идея / первый кейс для портфолио. Это пока не приложение.
+AI workflow for small businesses that helps managers process incoming leads faster and more consistently.
 
-Сейчас задача - не строить полноценный продукт, а зафиксировать понятный бизнес-процесс, который потом можно превратить в демо.
+The workflow turns an unstructured customer request into a clear summary, priority level, and recommended next action.
 
-## Фокус
+## Use Case
 
-Я делаю **AI-автоматизацию для бизнеса**.
+Small businesses often receive leads from forms, messengers, email, landing pages, or CRM systems. Managers need to quickly understand:
 
-Не "нейросети вообще", а маленькие полезные workflow, которые помогают бизнесу быстрее обрабатывать рутину.
+- what the customer wants;
+- how urgent the request is;
+- whether the lead is high priority;
+- what should happen next.
 
-## Первый процесс
+This workflow helps structure that first step.
 
-**Входящие заявки / лиды малого бизнеса.**
-
-Пример: клиент оставил заявку через форму, написал в мессенджер или заполнил анкету. Менеджеру нужно быстро понять:
-
-- что хочет клиент;
-- насколько заявка важная;
-- кому отвечать первым;
-- что написать или сделать дальше.
-
-## Простая цепочка
+## Workflow
 
 ```text
-заявка -> таблица -> AI summary -> приоритет -> следующий шаг менеджеру
+incoming lead -> table / CRM -> AI analysis -> priority -> manager next action
 ```
 
-## Что делает AI
+## AI Output
 
-AI получает текст заявки и возвращает структурированный результат:
+For each lead, the AI returns:
 
-- категория: `hot / warm / cold`;
-- краткое summary;
-- причина оценки;
-- следующий шаг для менеджера;
-- нужна ли ручная проверка.
+- lead category: `hot`, `warm`, or `cold`;
+- short summary;
+- reason for the category;
+- recommended next step;
+- human review flag.
 
-## Пример входа
+## Example Input
 
 ```text
-Здравствуйте. Хочу настроить CRM и автоматические ответы на заявки с сайта.
-У нас 3 менеджера, около 40 заявок в день. Бюджет обсуждаем, нужно начать в течение недели.
+Hello. We want to set up CRM and automatic replies for website leads.
+We have 3 sales managers and around 40 leads per day.
+Budget is open for discussion, and we want to start within a week.
 ```
 
-## Пример выхода
+## Example Output
 
 ```json
 {
   "category": "hot",
-  "summary": "Клиент хочет CRM и автоматические ответы на заявки, объем около 40 заявок в день.",
-  "reason": "Есть понятная потребность, команда менеджеров, срочность и готовность обсуждать бюджет.",
-  "next_step": "Написать клиенту и предложить короткий созвон для разбора текущего процесса.",
+  "summary": "The company wants CRM setup and automated replies for around 40 website leads per day.",
+  "reason": "The request has a clear business need, team context, urgency, and budget readiness.",
+  "next_step": "Offer a short discovery call to map the current lead handling process.",
   "needs_human_review": true
 }
 ```
 
-## Минимальное демо
+## Minimal Demo
 
-Для первого демо не нужен сложный SaaS.
+A simple demo can be built with:
 
-Достаточно:
+- Google Form or manual lead input;
+- Google Sheets as a lightweight database;
+- OpenAI / ChatGPT / Make / n8n for AI analysis;
+- result written back to the sheet;
+- Telegram or email notification for the manager.
 
-1. Google Form или ручной ввод заявки.
-2. Google Sheets как база.
-3. ChatGPT / OpenAI / Make / n8n для анализа.
-4. Результат обратно в таблицу.
-5. Уведомление менеджеру в Telegram или email.
+## Business Value
 
-## Что показать в портфолио
+- Faster lead triage.
+- Clearer priorities for managers.
+- Less manual reading of repetitive requests.
+- Consistent lead handling format.
+- Better visibility for the business owner.
 
-- скриншот таблицы с тестовыми заявками;
-- схему workflow;
-- пример входа и выхода;
-- короткое demo-видео на 2-4 минуты;
-- README с объяснением бизнес-пользы.
+## Portfolio Artifacts
 
-## Почему это полезно бизнесу
-
-- менеджер быстрее понимает, кому отвечать первым;
-- заявки не теряются;
-- меньше ручного чтения однотипных сообщений;
-- появляется единый формат обработки;
-- владелец видит понятную таблицу с приоритетами.
-
-## Следующий шаг
-
-Сначала сделать Google Sheet с 10 тестовыми заявками.
-
-Только после этого собирать прототип:
-
-```text
-Form / manual input -> Sheets -> AI -> Sheets -> Telegram/email
-```
+- workflow diagram;
+- test lead table;
+- before / after example;
+- AI prompt and structured output;
+- short demo video;
+- README explaining the business problem and implementation.
