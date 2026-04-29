@@ -1,5 +1,6 @@
 # SEO Product Description Generator
 https://drive.google.com/file/d/1qpDJuROJc4sSyifRTpW7PbEL2YqJJb51/view?usp=drive_link
+
 Portfolio/test assignment project: a Flowise + Ollama workflow wrapped by a small NestJS API.
 
 The service accepts product data and returns a structured SEO JSON response:
