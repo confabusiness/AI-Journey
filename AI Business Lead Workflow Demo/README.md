@@ -6,6 +6,7 @@ Portfolio MVP showing how incoming business leads can be collected from a Google
 
 - Google Form: https://docs.google.com/forms/d/1mR0s35XgwwsVMzPQ7Ordf9xHMqudD6n13O-I2NHIG3A/edit
 - Google Sheet: https://docs.google.com/spreadsheets/d/17zad7dTvH1r3zl3o-8Ef5LoAKSzEmhLjb-lw_CrMcjM/edit?gid=567416417#gid=567416417
+- Demo Video: https://drive.google.com/file/d/1538TxVEdUdhyBk5tOLcJv3PStR_mgS1e/view?usp=sharing
 
 ## Problem
 
@@ -42,7 +43,7 @@ For each incoming lead, the AI analysis adds:
 
 ## Demo Dataset
 
-The demo uses 10 realistic synthetic leads from different business contexts:
+The demo uses 11 realistic synthetic leads from different business contexts:
 
 - recruiting and HR
 - ecommerce support
@@ -53,6 +54,7 @@ The demo uses 10 realistic synthetic leads from different business contexts:
 - delivery operations
 - design studio discovery
 - logistics RFQ processing
+- AI consultation and discovery for a tools company
 
 The dataset is designed for portfolio review and GitHub presentation. It does not contain real customer data.
 
