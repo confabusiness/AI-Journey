@@ -78,6 +78,12 @@ The manual enrichment step can be automated later with:
 - a serverless API function
 - CRM or email integration
 
+## Next Stage
+
+The next stage is to validate the workflow with 30-50 potential clients and collect real feedback before building full automation.
+
+- [30-50 Client Outreach Plan](next-stage-30-50-clients.md)
+
 ## Portfolio Value
 
 This project demonstrates a practical AI business automation workflow:
@@ -93,4 +99,5 @@ This project demonstrates a practical AI business automation workflow:
 
 - `prompt-template.md`: the structured prompt used for manual AI enrichment.
 - `ai-analysis-demo.csv`: exported snapshot of the cleaned `AI Analysis` demo dataset.
+- `next-stage-30-50-clients.md`: outreach and validation plan for the next commercial stage.
 
