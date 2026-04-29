@@ -1,0 +1,11 @@
+node_modules/
+dist/
+*.log
+.env
+.flowise/
+database.sqlite
+*.sqlite
+*.key
+*.mp4
+uploads/
+storage/

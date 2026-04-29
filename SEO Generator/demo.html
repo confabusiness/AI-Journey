@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SEO Product Description Generator</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Inter, Segoe UI, Arial, sans-serif;
+      --bg: #f6f7f9;
+      --panel: #ffffff;
+      --text: #1f2933;
+      --muted: #667085;
+      --line: #d7dde5;
+      --accent: #1565c0;
+      --accent-dark: #0d47a1;
+      --danger: #b42318;
+      --ok: #067647;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    main {
+      width: min(1120px, calc(100vw - 32px));
+      margin: 28px auto;
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin: 0 0 6px;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      font-size: 16px;
+      margin: 0 0 14px;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin: 14px 0 6px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 10px 11px;
+      font: inherit;
+      background: #fff;
+      color: var(--text);
+    }
+
+    textarea {
+      min-height: 84px;
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      min-height: 42px;
+      margin-top: 16px;
+      border: 0;
+      border-radius: 6px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: var(--accent-dark);
+    }
+
+    button:disabled {
+      cursor: wait;
+      opacity: .7;
+    }
+
+    .status {
+      margin-top: 12px;
+      min-height: 20px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .status.ok {
+      color: var(--ok);
+    }
+
+    .status.error {
+      color: var(--danger);
+    }
+
+    .result-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .field {
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+    }
+
+    .field:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .field-name {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .field-value {
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+
+    ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+    }
+
+    pre {
+      margin: 16px 0 0;
+      padding: 12px;
+      max-height: 280px;
+      overflow: auto;
+      border-radius: 6px;
+      border: 1px solid var(--line);
+      background: #f9fafb;
+      font-size: 12px;
+      white-space: pre-wrap;
+    }
+
+    @media (max-width: 860px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section>
+      <h1>SEO Generator</h1>
+      <p>Введите данные товара, API отправит их в Flowise и вернёт SEO JSON.</p>
+
+      <form id="form">
+        <label for="product_name">Название товара</label>
+        <input id="product_name" name="product_name" value="Кожаный рюкзак для ноутбука 15 дюймов" required>
+
+        <label for="category">Категория</label>
+        <input id="category" name="category" value="Рюкзаки и сумки" required>
+
+        <label for="keywords">Ключевые слова</label>
+        <textarea id="keywords" name="keywords" required>кожаный рюкзак, рюкзак для ноутбука, рюкзак 15 дюймов</textarea>
+
+        <button id="submit" type="submit">Сгенерировать</button>
+        <div id="status" class="status">API: http://127.0.0.1:3100/api/generate-seo</div>
+      </form>
+    </section>
+
+    <section>
+      <h2>Результат</h2>
+      <div id="result" class="result-grid">
+        <p>Пока ничего не сгенерировано.</p>
+      </div>
+      <pre id="raw" hidden></pre>
+    </section>
+  </main>
+
+  <script>
+    const form = document.getElementById('form')
+    const submit = document.getElementById('submit')
+    const statusEl = document.getElementById('status')
+    const resultEl = document.getElementById('result')
+    const rawEl = document.getElementById('raw')
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault()
+      submit.disabled = true
+      statusEl.className = 'status'
+      statusEl.textContent = 'Генерация...'
+      resultEl.innerHTML = '<p>Ждём ответ Flowise/Ollama.</p>'
+      rawEl.hidden = true
+      rawEl.textContent = ''
+
+      const payload = {
+        product_name: form.product_name.value.trim(),
+        category: form.category.value.trim(),
+        keywords: form.keywords.value.trim()
+      }
+
+      try {
+        const response = await fetch('http://127.0.0.1:3100/api/generate-seo', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json; charset=utf-8' },
+          body: JSON.stringify(payload)
+        })
+
+        if (!response.ok) {
+          const error = await response.text()
+          throw new Error(error || `HTTP ${response.status}`)
+        }
+
+        const text = await response.text()
+        rawEl.hidden = false
+        rawEl.textContent = text
+
+        const events = text.trim().split('\n').filter(Boolean).map((line) => JSON.parse(line))
+        const errorEvent = events.find((item) => item.event === 'error')
+        if (errorEvent) throw new Error(errorEvent.error)
+
+        const resultEvent = events.find((item) => item.event === 'result')
+        if (!resultEvent || !resultEvent.data) throw new Error('Result event is missing')
+
+        renderResult(resultEvent.data)
+        statusEl.className = 'status ok'
+        statusEl.textContent = 'Готово'
+      } catch (error) {
+        statusEl.className = 'status error'
+        statusEl.textContent = error instanceof Error ? error.message : 'Ошибка'
+        resultEl.innerHTML = '<p>Не удалось получить корректный результат.</p>'
+      } finally {
+        submit.disabled = false
+      }
+    })
+
+    function renderResult(data) {
+      const bullets = Array.isArray(data.bullets)
+        ? data.bullets
+        : String(data.bullets || '').split(/\n|;|•/).map((item) => item.trim()).filter(Boolean)
+
+      resultEl.innerHTML = `
+        ${field('Title', data.title)}
+        ${field('Meta description', data.meta_description)}
+        ${field('H1', data.h1)}
+        ${field('Description', data.description)}
+        <div class="field">
+          <div class="field-name">Bullets</div>
+          <ul>${bullets.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
+        </div>
+      `
+    }
+
+    function field(name, value) {
+      return `
+        <div class="field">
+          <div class="field-name">${escapeHtml(name)}</div>
+          <div class="field-value">${escapeHtml(value || '')}</div>
+        </div>
+      `
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;')
+    }
+  </script>
+</body>
+</html>

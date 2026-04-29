@@ -1,0 +1,390 @@
+{
+  "id": "1f3ed5ba-65f7-47f1-bc73-9d0f96b92a10",
+  "name": "Ollama - SEO Product Description Generator",
+  "category": "SEO",
+  "type": "CHATFLOW",
+  "flowData": {
+    "nodes": [
+      {
+        "width": 300,
+        "height": 650,
+        "id": "chatOllama_0",
+        "position": {
+          "x": 80,
+          "y": 60
+        },
+        "type": "customNode",
+        "data": {
+          "id": "chatOllama_0",
+          "label": "Ollama",
+          "version": 5,
+          "name": "chatOllama",
+          "type": "ChatOllama",
+          "baseClasses": [
+            "ChatOllama",
+            "SimpleChatModel",
+            "BaseChatModel",
+            "BaseLanguageModel",
+            "Runnable"
+          ],
+          "category": "Chat Models",
+          "description": "Chat completion using open-source LLM on Ollama",
+          "inputParams": [
+            {
+              "label": "Base URL",
+              "name": "baseUrl",
+              "type": "string",
+              "default": "http://localhost:11434",
+              "id": "chatOllama_0-input-baseUrl-string"
+            },
+            {
+              "label": "Model Name",
+              "name": "modelName",
+              "type": "string",
+              "placeholder": "llama2",
+              "id": "chatOllama_0-input-modelName-string"
+            },
+            {
+              "label": "Temperature",
+              "name": "temperature",
+              "type": "number",
+              "step": 0.1,
+              "default": 0.9,
+              "optional": true,
+              "id": "chatOllama_0-input-temperature-number"
+            },
+            {
+              "label": "Context Window Size",
+              "name": "numCtx",
+              "type": "number",
+              "step": 1,
+              "optional": true,
+              "additionalParams": true,
+              "id": "chatOllama_0-input-numCtx-number"
+            },
+            {
+              "label": "Streaming",
+              "name": "streaming",
+              "type": "boolean",
+              "default": true,
+              "optional": true,
+              "additionalParams": true,
+              "id": "chatOllama_0-input-streaming-boolean"
+            },
+            {
+              "label": "JSON Mode",
+              "name": "jsonMode",
+              "type": "boolean",
+              "optional": true,
+              "additionalParams": true,
+              "id": "chatOllama_0-input-jsonMode-boolean"
+            },
+            {
+              "label": "Keep Alive",
+              "name": "keepAlive",
+              "type": "string",
+              "default": "5m",
+              "optional": true,
+              "additionalParams": true,
+              "id": "chatOllama_0-input-keepAlive-string"
+            }
+          ],
+          "inputAnchors": [
+            {
+              "label": "Cache",
+              "name": "cache",
+              "type": "BaseCache",
+              "optional": true,
+              "id": "chatOllama_0-input-cache-BaseCache"
+            }
+          ],
+          "inputs": {
+            "cache": "",
+            "baseUrl": "http://127.0.0.1:11434",
+            "modelName": "apertus-tools-seo",
+            "temperature": 0.3,
+            "topP": "",
+            "topK": "",
+            "mirostat": "",
+            "mirostatEta": "",
+            "mirostatTau": "",
+            "numCtx": "8192",
+            "numGqa": "",
+            "numGpu": "",
+            "numThread": "",
+            "repeatLastN": "",
+            "repeatPenalty": "",
+            "stop": "",
+            "tfsZ": "",
+            "streaming": true,
+            "allowImageUploads": false,
+            "think": false,
+            "jsonMode": false,
+            "keepAlive": "30m"
+          },
+          "outputAnchors": [
+            {
+              "id": "chatOllama_0-output-chatOllama-ChatOllama|SimpleChatModel|BaseChatModel|BaseLanguageModel|Runnable",
+              "name": "chatOllama",
+              "label": "ChatOllama",
+              "type": "ChatOllama | SimpleChatModel | BaseChatModel | BaseLanguageModel | Runnable"
+            }
+          ],
+          "outputs": {},
+          "selected": false
+        },
+        "selected": false,
+        "positionAbsolute": {
+          "x": 80,
+          "y": 60
+        },
+        "dragging": false
+      },
+      {
+        "width": 300,
+        "height": 360,
+        "id": "promptTemplate_0",
+        "position": {
+          "x": 80,
+          "y": 780
+        },
+        "type": "customNode",
+        "data": {
+          "id": "promptTemplate_0",
+          "label": "Prompt Template",
+          "version": 1,
+          "name": "promptTemplate",
+          "type": "PromptTemplate",
+          "baseClasses": [
+            "BasePromptTemplate",
+            "Runnable"
+          ],
+          "category": "Prompts",
+          "description": "Schema to represent a basic prompt for an LLM",
+          "inputParams": [
+            {
+              "label": "Template",
+              "name": "template",
+              "type": "string",
+              "rows": 4,
+              "id": "promptTemplate_0-input-template-string"
+            },
+            {
+              "label": "Format Prompt Values",
+              "name": "promptValues",
+              "type": "json",
+              "optional": true,
+              "acceptVariable": true,
+              "list": true,
+              "id": "promptTemplate_0-input-promptValues-json"
+            }
+          ],
+          "inputAnchors": [],
+          "inputs": {
+            "template": "You are an ecommerce SEO copywriter.\n\nCreate an SEO product description in Russian for the product below.\n\nProduct name: {product_name}\nCategory: {category}\nSEO keywords: {keywords}\n\nRules:\n- Return only valid JSON matching the parser schema.\n- title: concise marketplace-style title, 45-70 characters if possible.\n- meta_description: 120-160 characters, include the main keyword naturally.\n- h1: clean page heading, no keyword stuffing.\n- description: one string with 2 short paragraphs separated by \"\\n\\n\"; useful and specific, no unsupported claims.\n- bullets: 4-6 short benefit bullets as an array of strings.\n- Do not invent exact materials, sizes, certifications, discounts, delivery terms, or warranty unless they are present in the input.\n- Do not invent integrations, app control, voice control, smart-home ecosystems, lifespan hours, wattage, power, dimensions, color temperature range, or energy class unless explicitly present in the input.\n- If the product name contains a broad word like \"smart\" or \"умная\", you may say it is positioned as a smart product, but you must not name specific protocols, apps, ecosystems, or control methods without input evidence.\n- Treat the input as the full product specification. Do not add hidden features such as compartments, zippers, pockets, adjustable straps, natural leather, compatibility, protection level, durability hours, or use cases unless directly stated.\n- You may rephrase only facts present in product_name, category, and keywords. When unsure, use generic wording like \"подходит для повседневного использования\" instead of specific technical claims.\n- If input is sparse, write neutral copy and avoid fake facts.",
+            "promptValues": {
+              "product_name": "{{$vars.product_name}}",
+              "category": "{{$vars.category}}",
+              "keywords": "{{$vars.keywords}}"
+            }
+          },
+          "outputAnchors": [
+            {
+              "id": "promptTemplate_0-output-promptTemplate-BasePromptTemplate|Runnable",
+              "name": "promptTemplate",
+              "label": "PromptTemplate",
+              "type": "BasePromptTemplate | Runnable"
+            }
+          ],
+          "outputs": {},
+          "selected": false
+        },
+        "selected": false,
+        "positionAbsolute": {
+          "x": 80,
+          "y": 780
+        },
+        "dragging": false
+      },
+      {
+        "width": 300,
+        "height": 300,
+        "id": "advancedStructuredOutputParser_0",
+        "position": {
+          "x": 480,
+          "y": 780
+        },
+        "type": "customNode",
+        "data": {
+          "id": "advancedStructuredOutputParser_0",
+          "label": "Advanced Structured Output Parser",
+          "version": 1,
+          "name": "advancedStructuredOutputParser",
+          "type": "AdvancedStructuredOutputParser",
+          "baseClasses": [
+            "AdvancedStructuredOutputParser",
+            "BaseOutputParser"
+          ],
+          "category": "Output Parsers",
+          "description": "Parse the output of an LLM call into a given structure by providing a Zod schema.",
+          "inputParams": [
+            {
+              "label": "Autofix",
+              "name": "autofixParser",
+              "type": "boolean",
+              "optional": true,
+              "id": "advancedStructuredOutputParser_0-input-autofixParser-boolean"
+            },
+            {
+              "label": "Example JSON",
+              "name": "exampleJson",
+              "type": "string",
+              "rows": 10,
+              "id": "advancedStructuredOutputParser_0-input-exampleJson-string"
+            }
+          ],
+          "inputAnchors": [],
+          "inputs": {
+            "autofixParser": false,
+            "exampleJson": "z.object({\n  title: z.string().describe(\"SEO title for product card\"),\n  meta_description: z.string().describe(\"Search snippet meta description\"),\n  h1: z.string().describe(\"Product page H1 heading\"),\n  description: z.string().describe(\"Readable product description in Russian as a single string\"),\n  bullets: z.array(z.string()).min(3).max(6).describe(\"Short product benefit bullet points\")\n})"
+          },
+          "outputAnchors": [
+            {
+              "id": "advancedStructuredOutputParser_0-output-advancedStructuredOutputParser-AdvancedStructuredOutputParser|BaseOutputParser",
+              "name": "advancedStructuredOutputParser",
+              "label": "AdvancedStructuredOutputParser",
+              "type": "AdvancedStructuredOutputParser | BaseOutputParser"
+            }
+          ],
+          "outputs": {},
+          "selected": false
+        },
+        "selected": false,
+        "positionAbsolute": {
+          "x": 480,
+          "y": 780
+        },
+        "dragging": false
+      },
+      {
+        "width": 300,
+        "height": 360,
+        "id": "llmChain_0",
+        "position": {
+          "x": 880,
+          "y": 420
+        },
+        "type": "customNode",
+        "data": {
+          "id": "llmChain_0",
+          "label": "LLM Chain",
+          "version": 3,
+          "name": "llmChain",
+          "type": "LLMChain",
+          "baseClasses": [
+            "LLMChain",
+            "BaseChain",
+            "Runnable"
+          ],
+          "category": "Chains",
+          "description": "Chain to run queries against LLMs",
+          "inputParams": [
+            {
+              "label": "Chain Name",
+              "name": "chainName",
+              "type": "string",
+              "placeholder": "Name Your Chain",
+              "optional": true,
+              "id": "llmChain_0-input-chainName-string"
+            }
+          ],
+          "inputAnchors": [
+            {
+              "label": "Language Model",
+              "name": "model",
+              "type": "BaseLanguageModel",
+              "id": "llmChain_0-input-model-BaseLanguageModel"
+            },
+            {
+              "label": "Prompt",
+              "name": "prompt",
+              "type": "BasePromptTemplate",
+              "id": "llmChain_0-input-prompt-BasePromptTemplate"
+            },
+            {
+              "label": "Output Parser",
+              "name": "outputParser",
+              "type": "BaseLLMOutputParser",
+              "optional": true,
+              "id": "llmChain_0-input-outputParser-BaseLLMOutputParser"
+            },
+            {
+              "label": "Input Moderation",
+              "name": "inputModeration",
+              "type": "Moderation",
+              "optional": true,
+              "list": true,
+              "id": "llmChain_0-input-inputModeration-Moderation"
+            }
+          ],
+          "inputs": {
+            "inputModeration": "",
+            "model": "{{chatOllama_0.data.instance}}",
+            "prompt": "{{promptTemplate_0.data.instance}}",
+            "outputParser": "{{advancedStructuredOutputParser_0.data.instance}}",
+            "chainName": "seo_product_description_generator"
+          },
+          "outputAnchors": [
+            {
+              "id": "llmChain_0-output-llmChain-LLMChain|BaseChain|Runnable",
+              "name": "llmChain",
+              "label": "LLM Chain",
+              "type": "LLMChain | BaseChain | Runnable"
+            }
+          ],
+          "outputs": {
+            "output": "llmChain"
+          },
+          "selected": false
+        },
+        "selected": false,
+        "positionAbsolute": {
+          "x": 880,
+          "y": 420
+        },
+        "dragging": false
+      }
+    ],
+    "edges": [
+      {
+        "source": "chatOllama_0",
+        "sourceHandle": "chatOllama_0-output-chatOllama-ChatOllama|SimpleChatModel|BaseChatModel|BaseLanguageModel|Runnable",
+        "target": "llmChain_0",
+        "targetHandle": "llmChain_0-input-model-BaseLanguageModel",
+        "type": "buttonedge",
+        "id": "chatOllama_0-chatOllama_0-output-chatOllama-ChatOllama|SimpleChatModel|BaseChatModel|BaseLanguageModel|Runnable-llmChain_0-llmChain_0-input-model-BaseLanguageModel"
+      },
+      {
+        "source": "promptTemplate_0",
+        "sourceHandle": "promptTemplate_0-output-promptTemplate-BasePromptTemplate|Runnable",
+        "target": "llmChain_0",
+        "targetHandle": "llmChain_0-input-prompt-BasePromptTemplate",
+        "type": "buttonedge",
+        "id": "promptTemplate_0-promptTemplate_0-output-promptTemplate-BasePromptTemplate|Runnable-llmChain_0-llmChain_0-input-prompt-BasePromptTemplate"
+      },
+      {
+        "source": "advancedStructuredOutputParser_0",
+        "sourceHandle": "advancedStructuredOutputParser_0-output-advancedStructuredOutputParser-AdvancedStructuredOutputParser|BaseOutputParser",
+        "target": "llmChain_0",
+        "targetHandle": "llmChain_0-input-outputParser-BaseLLMOutputParser",
+        "type": "buttonedge",
+        "id": "advancedStructuredOutputParser_0-advancedStructuredOutputParser_0-output-advancedStructuredOutputParser-AdvancedStructuredOutputParser|BaseOutputParser-llmChain_0-llmChain_0-input-outputParser-BaseLLMOutputParser"
+      }
+    ],
+    "viewport": {
+      "x": 0,
+      "y": 0,
+      "zoom": 0.75
+    }
+  }
+}
