@@ -1,9 +1,29 @@
 # SEO Product Description Generator
 https://drive.google.com/file/d/1qpDJuROJc4sSyifRTpW7PbEL2YqJJb51/view?usp=drive_link
 
-Portfolio/test assignment project: a Flowise + Ollama workflow wrapped by a small NestJS API.
+Portfolio case study: a browser demo and local API that turn basic product data into structured SEO content for ecommerce.
 
-The service accepts product data and returns a structured SEO JSON response:
+The project shows how an AI workflow can produce a title, meta description, H1, product description, and bullet points from a small product brief. It keeps the business value visible first, while the technical architecture stays documented below.
+
+## Demo
+
+- Browser demo: `demo.html`
+- Demo video: https://drive.google.com/file/d/1qpDJuROJc4sSyifRTpW7PbEL2YqJJb51/view?usp=drive_link
+- Screenshot: TODO - add `assets/seo-demo-screenshot.png`
+
+## Problem
+
+Ecommerce teams often need many product descriptions, category-friendly titles, and meta descriptions. Writing each one manually is slow, repetitive, and inconsistent.
+
+## Solution
+
+This demo accepts three input fields:
+
+- product name
+- category
+- keywords
+
+It returns a structured SEO JSON response:
 
 - `title`
 - `meta_description`
@@ -11,28 +31,71 @@ The service accepts product data and returns a structured SEO JSON response:
 - `description`
 - `bullets`
 
-## Architecture
+## Example
+
+Input:
+
+```json
+{
+  "product_name": "Leather laptop backpack 15 inch",
+  "category": "Backpacks and bags",
+  "keywords": "leather backpack, laptop backpack, 15 inch backpack"
+}
+```
+
+Output shape:
+
+```json
+{
+  "title": "...",
+  "meta_description": "...",
+  "h1": "...",
+  "description": "...",
+  "bullets": ["...", "...", "..."]
+}
+```
+
+## Workflow
 
 ```text
-Client
+Browser demo
   -> POST /api/generate-seo
-  -> NestJS API
+  -> NestJS API validates input
   -> Flowise Prediction API
-  -> Flowise LLM Chain
-  -> Ollama model
-  -> Structured Output Parser
-  -> NDJSON streaming response
+  -> local Ollama model
+  -> structured output parser
+  -> NDJSON response rendered in browser
 ```
+
+## Business Value
+
+This workflow can help ecommerce and content teams:
+
+- create first drafts faster
+- keep output fields consistent
+- reduce repetitive copywriting work
+- separate product input from generated SEO fields
+- review AI output before publishing
+
+## Stack
+
+- Flowise for visual AI workflow orchestration
+- Ollama for local LLM execution
+- NestJS for the API boundary
+- HTML/CSS/JavaScript for the browser demo
+- NDJSON streaming for simple client-friendly responses
 
 ## Repository Structure
 
 ```text
-api/                         NestJS endpoint
-flowise/chatflow-export.json Flowise chatflow export
+demo.html                     Browser demo
+api/                          NestJS endpoint
+flowise/chatflow-export.json  Flowise chatflow export
 ollama/apertus-tools-seo.Modelfile
 docs/architecture.md
 docs/edge-cases.md
 docs/follow-up-notes.md
+docs/video-script.md
 ```
 
 ## Requirements
@@ -40,39 +103,19 @@ docs/follow-up-notes.md
 - Node.js 20+
 - Flowise running locally on `http://127.0.0.1:3000`
 - Ollama running locally on `http://127.0.0.1:11434`
-- Imported Flowise chatflow from `flowise/chatflow-export.json`
+- imported Flowise chatflow from `flowise/chatflow-export.json`
 - Ollama model alias from `ollama/apertus-tools-seo.Modelfile`
 
-## Ollama Setup
+## Setup
+
+Create the Ollama model alias:
 
 ```powershell
 ollama create apertus-tools-seo -f .\ollama\apertus-tools-seo.Modelfile
 ollama show apertus-tools-seo
 ```
 
-The model alias uses `num_ctx 8192`. The SEO task has only three short input fields, so a 64K context window adds latency without improving output quality.
-
-## Flowise Setup
-
-Import:
-
-```text
-flowise/chatflow-export.json
-```
-
-The local test chatflow id was:
-
-```text
-1f3ed5ba-65f7-47f1-bc73-9d0f96b92a10
-```
-
-If your imported Flowise chatflow gets a different id, set it through the API environment variable:
-
-```powershell
-$env:FLOWISE_CHATFLOW_ID="your-imported-chatflow-id"
-```
-
-## API Setup
+Start the API:
 
 ```powershell
 cd .\api
@@ -87,43 +130,24 @@ Default API URL:
 http://127.0.0.1:3100
 ```
 
-## Browser Demo
-
-After starting the API, open:
+Open:
 
 ```text
 demo.html
 ```
 
-The demo page calls `POST http://127.0.0.1:3100/api/generate-seo` and renders the SEO fields in the browser.
+## Configuration
 
-For a video walkthrough with PowerShell startup commands and browser-only testing, use:
-
-```text
-docs/video-script.md
-```
-
-Demo video:
+The local test chatflow id was:
 
 ```text
-https://drive.google.com/file/d/1qpDJuROJc4sSyifRTpW7PbEL2YqJJb51/view?usp=drive_link
+1f3ed5ba-65f7-47f1-bc73-9d0f96b92a10
 ```
 
-## Example Request
+If your imported Flowise chatflow gets a different id, set it through the API environment variable:
 
 ```powershell
-$body = @{
-  product_name = "Кожаный рюкзак для ноутбука 15 дюймов"
-  category = "Рюкзаки и сумки"
-  keywords = "кожаный рюкзак, рюкзак для ноутбука, рюкзак 15 дюймов"
-} | ConvertTo-Json
-
-Invoke-WebRequest `
-  -UseBasicParsing `
-  -Method Post `
-  -Uri http://127.0.0.1:3100/api/generate-seo `
-  -ContentType "application/json; charset=utf-8" `
-  -Body $body
+$env:FLOWISE_CHATFLOW_ID="your-imported-chatflow-id"
 ```
 
 ## Streaming Response
@@ -145,6 +169,10 @@ Errors during generation are returned as stream events:
 
 Validation errors before generation return regular HTTP `400` JSON.
 
-## Notes
+## Next Improvements
 
-This project intentionally keeps Flowise as the orchestration layer and NestJS as the product API boundary. The API validates input, handles Flowise/network failures, normalizes JSON, and streams a simple client-friendly response.
+- add screenshot to the README
+- add a hosted browser-only mock demo
+- add examples for several product categories
+- add output quality checklist for human review
+- add optional export to CSV or Google Sheets
