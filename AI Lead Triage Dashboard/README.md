@@ -7,8 +7,10 @@ This is the main portfolio case for my AI Operations / Business Process Automati
 ## Demo
 
 - Live demo: TODO - publish through GitHub Pages
-- Screenshot: TODO - add `assets/dashboard-screenshot.png`
+- Screenshot: `assets/dashboard-screenshot.png`
 - 60-second walkthrough: TODO - add video link
+
+![AI Lead Triage Dashboard screenshot](assets/dashboard-screenshot.png)
 
 Open locally:
 

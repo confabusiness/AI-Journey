@@ -9,7 +9,9 @@ The project shows how an AI workflow can produce a title, meta description, H1, 
 
 - Browser demo: `demo.html`
 - Demo video: https://drive.google.com/file/d/1qpDJuROJc4sSyifRTpW7PbEL2YqJJb51/view?usp=drive_link
-- Screenshot: TODO - add `assets/seo-demo-screenshot.png`
+- Screenshot: `assets/seo-demo-screenshot.png`
+
+![SEO Generator browser demo screenshot](assets/seo-demo-screenshot.png)
 
 ## Problem
 
