@@ -1,30 +1,23 @@
-# AI Business Lead Workflow Demo
+# AI Business Lead Workflow
 
-Portfolio MVP showing how incoming business leads can be collected from a Google Form, stored in Google Sheets, and enriched with manual AI analysis before full automation.
+Portfolio case study showing how incoming business leads can be collected, structured, and reviewed with an AI-assisted workflow.
 
-## Live Demo Links
+## Demo Links
 
 - Google Form: https://docs.google.com/forms/d/1mR0s35XgwwsVMzPQ7Ordf9xHMqudD6n13O-I2NHIG3A/edit
 - Google Sheet: https://docs.google.com/spreadsheets/d/17zad7dTvH1r3zl3o-8Ef5LoAKSzEmhLjb-lw_CrMcjM/edit?gid=567416417#gid=567416417
-- Demo Video: https://drive.google.com/file/d/1538TxVEdUdhyBk5tOLcJv3PStR_mgS1e/view?usp=sharing
+- Demo video: https://drive.google.com/file/d/1538TxVEdUdhyBk5tOLcJv3PStR_mgS1e/view?usp=sharing
+- Dashboard: `AI Lead Triage Dashboard/index.html`
 
 ## Problem
 
-Small businesses receive inbound requests through forms, landing pages, messengers, email, or CRM systems. Managers need to quickly understand what the client wants, how urgent the request is, whether it is worth human attention, and what should happen next.
+Small businesses receive leads through forms, landing pages, messengers, email, and CRM systems. Managers need to understand the request, assess urgency, identify business potential, and respond quickly.
 
-Manual lead review is slow and inconsistent. This demo shows a simple AI-assisted workflow for turning raw form submissions into structured business decisions.
+## Solution
 
-## Workflow
+The workflow turns raw lead submissions into structured fields:
 
-```text
-Google Form -> Form Responses sheet -> manual AI analysis -> AI Analysis sheet -> manager next action
-```
-
-## What The AI Analysis Produces
-
-For each incoming lead, the AI analysis adds:
-
-- `lead_category`: `hot`, `warm`, or `cold`
+- `lead_category`
 - `company_summary`
 - `likely_pain_points`
 - `automation_opportunity`
@@ -35,69 +28,30 @@ For each incoming lead, the AI analysis adds:
 - `needs_human_review`
 - `status`
 
-## Sheets Structure
+## Workflow
 
-- `Form Responses`: raw source data from the Google Form. This sheet is intentionally left as the form-connected source.
-- `AI Analysis`: cleaned English portfolio dataset with 10 demo leads and structured AI enrichment.
-- `Prompt Template`: readable English prompt template for manual analysis in Perplexity or ChatGPT.
+```text
+Google Form -> Google Sheets -> AI analysis -> manager dashboard -> follow-up
+```
 
-## Demo Dataset
+## Dashboard
 
-The demo uses 11 realistic synthetic leads from different business contexts:
+The included dashboard presents enriched leads as filterable cards with priority, summary, pain points, recommended action, draft reply, and human-review status.
 
-- recruiting and HR
-- ecommerce support
-- healthcare request triage
-- marketing agency operations
-- online school support
-- field service dispatch
-- delivery operations
-- design studio discovery
-- logistics RFQ processing
-- AI consultation and discovery for a tools company
+Open locally:
 
-The dataset is designed for portfolio review and GitHub presentation. It does not contain real customer data.
+```text
+AI Lead Triage Dashboard/index.html
+```
 
-## MVP Scope
+## Data
 
-This is a manual-AI MVP:
+The demo uses synthetic leads based on realistic small-business scenarios. No real customer data is included.
 
-- lead intake through Google Form
-- storage in Google Sheets
-- prompt-based analysis with Perplexity or ChatGPT
-- results pasted into the `AI Analysis` sheet
-- status and human-review flags for manager workflow
+## Business Value
 
-## Future Automation
-
-The manual enrichment step can be automated later with:
-
-- Google Apps Script
-- n8n or Make
-- a local Python or Node.js script
-- a serverless API function
-- CRM or email integration
-
-## Next Stage
-
-The next stage is to validate the workflow with 30-50 potential clients and collect real feedback before building full automation.
-
-- [30-50 Client Outreach Plan](next-stage-30-50-clients.md)
-
-## Portfolio Value
-
-This project demonstrates a practical AI business automation workflow:
-
-- clear before/after structure
-- realistic source data
-- structured AI output
-- human-in-the-loop review logic
-- business-focused next steps
-- simple implementation using accessible tools
-
-## Included Files
-
-- `prompt-template.md`: the structured prompt used for manual AI enrichment.
-- `ai-analysis-demo.csv`: exported snapshot of the cleaned `AI Analysis` demo dataset.
-- `next-stage-30-50-clients.md`: outreach and validation plan for the next commercial stage.
-
+- Faster lead review
+- Clearer manager priorities
+- Consistent qualification format
+- Human review for sensitive or high-value cases
+- Simple implementation with accessible business tools

@@ -1,75 +1,42 @@
 # Daniil Velikanov - AI Operations Portfolio
 
-Portfolio repository for practical AI Operations, HR automation, and business process automation projects.
+I build practical AI workflows for leads, HR operations, documents, spreadsheets, ecommerce content, and repetitive business processes.
 
-Positioning:
+## What I Can Do For Your Business
 
-> I build practical AI workflows for HR, operations, documents, leads, spreadsheets, and repetitive business processes.
+- Turn incoming leads, forms, emails, or spreadsheet rows into structured summaries, priorities, and follow-up drafts.
+- Build manager-facing dashboards for reviewing leads, requests, candidates, documents, and operational queues.
+- Create AI-assisted workflows with human review for sensitive, high-value, or client-facing decisions.
+- Prototype practical automations with Google Forms, Google Sheets, browser workflows, APIs, and lightweight dashboards.
+- Help ecommerce teams generate consistent SEO content from structured product data.
 
-## Selected Projects
+## How I Work
 
-### 1. AI Lead Triage Dashboard
+I focus on small, clear workflows that can be tested quickly: one input source, one structured output, and one business decision made easier.
 
-Static dashboard demo that turns messy inbound business requests into priority, summary, pain points, next action, and a draft reply.
+My goal is not to replace the manager. It is to remove repetitive reading, copying, sorting, and drafting so the manager can review better information faster.
 
-Best for showing:
+## Projects
 
-- AI Operations positioning
-- lead and request triage
-- manager-facing dashboards
-- human-in-the-loop workflow design
+### AI Business Lead Workflow
 
-Open: `AI Lead Triage Dashboard/index.html`
+Google Form and Google Sheets workflow that turns raw inbound business requests into structured lead analysis: priority, summary, pain points, automation opportunity, reply draft, and human-review status.
 
-### 2. SEO Product Description Generator
-
-Browser demo and local API that generate structured ecommerce SEO content from product data.
-
-Best for showing:
-
-- practical AI workflow orchestration
-- Flowise + Ollama + NestJS integration
-- structured JSON output
-- product thinking for ecommerce content operations
-
-Open: `SEO Generator/README.md`
-
-### 3. AI Business Lead Workflow Demo
-
-Manual-AI MVP that collects inbound leads through Google Forms / Sheets and enriches them with structured AI analysis.
-
-Best for showing:
-
-- spreadsheet-based business workflow design
-- lead intake and qualification
-- validation before full automation
-- accessible AI implementation for small teams
+Includes a static AI Lead Triage Dashboard for reviewing enriched leads in a manager-friendly interface.
 
 Open: `AI Business Lead Workflow Demo/README.md`
 
-## Portfolio Narrative
+### SEO Product Description Generator
 
-These projects should be presented as one line of work:
+Browser demo and local API that generate structured ecommerce SEO content from product name, category, and keywords.
 
-```text
-HR and operations experience
-  -> repetitive documents, tables, vacancies, candidates, and incoming requests
-  -> AI-assisted analysis and browser workflows
-  -> simple dashboards, structured outputs, and human-controlled automation
-```
+Built with Flowise, Ollama, NestJS, and a lightweight HTML/CSS/JavaScript demo interface.
 
-## What This Portfolio Demonstrates
+Open: `SEO Generator/README.md`
 
-- HR and operations automation thinking
-- lead, candidate, and request triage workflows
-- AI-assisted document and spreadsheet workflows
-- browser-based demos that can be reviewed without private data
-- business-readable documentation and case-study structure
+## Best Fit
 
-## Next Portfolio Tasks
-
-- publish `AI Lead Triage Dashboard` through GitHub Pages
-- add dashboard screenshot to the Lead Triage README
-- record 45-60 second walkthrough for Lead Triage
-- add screenshot to SEO Generator README
-- turn HR automation screenshots into a separate case study folder
+- Small businesses with manual lead review
+- HR and recruiting teams handling repetitive candidate or vacancy workflows
+- Operations teams working with documents, forms, spreadsheets, and request queues
+- Ecommerce teams that need structured product SEO content

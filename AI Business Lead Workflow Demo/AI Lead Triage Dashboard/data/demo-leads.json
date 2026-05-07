@@ -174,7 +174,7 @@
     "automation_opportunity": "Brief summarizer: paste transcript/brief, extract project goals, requirements, risks, and next questions.",
     "ai_summary": "Wants a lightweight AI prototype for summarizing client discovery materials.",
     "ai_reason": "Low budget but clear MVP and useful portfolio case.",
-    "next_step": "Offer a manual/semi-automated prototype using sample briefs before API automation.",
+    "next_step": "Offer a lightweight brief summarizer using sample briefs and clear review status.",
     "personalized_reply": "Hi Laura, a low-cost prototype is realistic: we can use sample briefs to generate summaries, risks, missing info, and next questions for the design team.",
     "needs_human_review": "no",
     "status": "research_needed"

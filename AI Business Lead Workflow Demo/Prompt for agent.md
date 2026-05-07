@@ -1,26 +1,18 @@
-# Prompt Template
-
-## Prompt Name
-
-Lead enrichment / AI analysis
+# Lead Analysis Prompt
 
 ## Purpose
 
-Turn one inbound business lead into a concise AI automation opportunity assessment for the portfolio demo.
+Turn one inbound business lead into a concise automation opportunity assessment.
 
-## When To Use
-
-Copy one row from `Form Responses` or `AI Analysis`, paste it below the prompt, and run the analysis manually in Perplexity or ChatGPT before API automation.
-
-## MVP Workflow
+## Workflow
 
 ```text
-Google Form -> Google Sheets -> manual AI analysis with Perplexity/ChatGPT -> AI Analysis sheet
+Google Form -> Google Sheets -> AI analysis -> AI Analysis sheet -> dashboard
 ```
 
 ## Role
 
-You are an AI business automation analyst. You review inbound leads and identify practical automation opportunities.
+You are a business automation analyst. Review inbound leads and identify practical automation opportunities.
 
 ## Task
 
@@ -86,9 +78,8 @@ likely_pain_points: manual CV review and slow shortlisting
 automation_opportunity: AI candidate screening table
 ai_summary: needs fit-score workflow for CV review
 ai_reason: urgent and operationally clear
-next_step: propose a 7-day demo with synthetic data
-personalized_reply: I can prototype a candidate screening table with summaries, fit score, risks, and next recruiter action.
+next_step: offer a 7-day candidate screening demo with synthetic data
+personalized_reply: I can prototype a candidate screening table with summaries, fit score, risks, and recruiter review status.
 needs_human_review: yes
 status: ready_for_review
 ```
-
