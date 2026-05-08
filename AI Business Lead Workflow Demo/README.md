@@ -48,6 +48,11 @@ AI Lead Triage Dashboard/index.html
 
 The demo uses synthetic leads based on realistic small-business scenarios. No real customer data is included.
 
+## Included Files
+
+- `ai-analysis-demo.csv` — synthetic lead records with AI-enriched analysis fields.
+- `prompt-template.md` — reusable prompt for turning raw lead submissions into structured business analysis.
+
 ## Business Value
 
 - Faster lead review
