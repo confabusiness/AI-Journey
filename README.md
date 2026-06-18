@@ -18,6 +18,12 @@ My goal is not to replace the manager. It is to remove repetitive reading, copyi
 
 ## Projects
 
+### Product Description Automation
+
+Commercial n8n workflow that turns Google Sheets product rows into ready-to-review Google Docs with structured descriptions, source links, images, fact-checking, and status updates.
+
+Open: `Commercial Projects/Description Automation/README.md`
+
 ### AI Business Lead Workflow
 
 Google Form and Google Sheets workflow that turns raw inbound business requests into structured lead analysis: priority, summary, pain points, automation opportunity, reply draft, and human-review status.
