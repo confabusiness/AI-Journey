@@ -49,7 +49,3 @@ Google Sheets -> n8n -> source search -> AI draft -> fact check -> image handlin
 - Gives managers a clear review queue.
 - Stores final descriptions as shareable Google Docs.
 - Keeps source and image references attached to the result.
-
-## Notes
-
-The public portfolio version should not include client credentials, private spreadsheet IDs, API keys, or real customer data.
