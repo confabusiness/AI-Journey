@@ -4,6 +4,10 @@ Commercial project: n8n workflow for generating product descriptions from Google
 
 Demo video: https://drive.google.com/file/d/1Q9DCvCz6bITSSSUcSkMlHfbnqaedx1Pq/view?usp=sharing
 
+## Client Feedback
+
+![Client feedback about the automation](./automation-review.png)
+
 ## Problem
 
 The client needed a repeatable way to prepare product descriptions from a spreadsheet without manually researching every item, copying links, writing text, and tracking status by hand.
